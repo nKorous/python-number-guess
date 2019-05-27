@@ -35,6 +35,14 @@ def incorrectGuess(g, d, m):
     x = input(f"Your last guess of {g} was {m} of the answer. Guess another number between {minNum} and {maxNum}: ")
     isInt(x)
 
+def priorGuessTable():
+    global pastGuesses
+
+    t = PrettyTable(['Chance', 'Guess', 'Actual Distance'])
+    for row in pastGuesses:
+        t.add_row(row)
+    print(t)
+
 def checkGuess(a, g):
     global chance
     global pastGuesses
@@ -42,12 +50,12 @@ def checkGuess(a, g):
     if dist == 0:
         incChance()
         logGuess(g, dist)
-        print(f" \n Congratulations, your guess of {g} was correct!")
+
+        print("\n ---------------------------------------------------------------------------")
+        print(f"\nCongratulations, your guess of {g} was correct!")
         print(f"You got the answer in {chance} chances! Here is how this played out:  \n")
-        t = PrettyTable(['Chance', 'Guess', 'Actual Distance'])
-        for row in pastGuesses:
-            t.add_row(row)
-        print(t)
+        priorGuessTable()
+        print("\n ------------------------------------------------------------------------")
 
         sys.exit() #exits program
     elif dist > 50:

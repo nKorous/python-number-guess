@@ -1,11 +1,12 @@
 from random import randint
+from prettytable import PrettyTable
 import sys
 
 answer = 0
 chance = 0
 minNum = 0
 maxNum = 100
-pastGuesses = ["Chance, Guess, Actual Distance"]
+pastGuesses = []
 
 def randNum(min, max):
     return randint(min, max)
@@ -21,7 +22,7 @@ def incChance():
 def logGuess(g, d):
     global pastGuesses
     global chance
-    pastGuesses.append(f"{chance}, {g}, {d}")
+    pastGuesses.append([chance, g, d])
 
 def incorrectGuess(g, d, m):
     global answer
@@ -41,10 +42,12 @@ def checkGuess(a, g):
     if dist == 0:
         incChance()
         logGuess(g, dist)
-        print(f"Congratulations, your guess of {g} was correct!")
+        print(f" \n Congratulations, your guess of {g} was correct!")
         print(f"You got the answer in {chance} chances! Here is how this played out:  \n")
-        for c in pastGuesses:
-            print(c, sep=',')
+        t = PrettyTable(['Chance', 'Guess', 'Actual Distance'])
+        for row in pastGuesses:
+            t.add_row(row)
+        print(t)
 
         sys.exit() #exits program
     elif dist > 50:

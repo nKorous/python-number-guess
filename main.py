@@ -1,10 +1,3 @@
-#!/usr/local/bin/python3
-
-##TODO:
-##1. make sure input is int
-##2. make sure empty(none, null) is handled
-##3. try, catch, except
-
 from random import randint
 import sys
 
